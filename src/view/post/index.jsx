@@ -25,7 +25,7 @@ class Post extends React.Component {
 
   componentDidMount() {
     if (!this.props.isLogin) {
-      this.props.history.push('/user/login?search=/post');
+      this.props.history.push('/user/login?search=/share');
     }
   }
 
@@ -96,7 +96,7 @@ class Post extends React.Component {
           onChange={this.tabChange}
           value={this.state.tab}
         >
-          <Radio.Button value="share" style={{ textAlign: 'center', width: '22%' }} >分享</Radio.Button>
+          <Radio.Button value="share" style={{ textAlign: 'center', width: '22%' }}>分享</Radio.Button>
           <Radio.Button value="ask" style={{ textAlign: 'center', width: '22%' }}>问答</Radio.Button>
           <Radio.Button value="job" style={{ textAlign: 'center', width: '22%' }}>招聘</Radio.Button>
           <Radio.Button value="dev" style={{ textAlign: 'center', width: '34%' }}>客户端测试</Radio.Button>
