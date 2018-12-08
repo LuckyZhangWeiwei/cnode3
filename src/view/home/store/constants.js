@@ -1,0 +1,4 @@
+export const GET_HOME_DATA = 'home/GET_HOME_DATA';
+export const GET_HOME_DATA_SAGA = 'home/GET_HOME_DATA_SAGA';
+export const UPDATE_PAGE_INFO = 'home/UPDATE_PAGE_INFO';
+export const UPDATE_SCROLL_DIRECTION = 'home/UPDATE_SCROLL_DIRECTION';
