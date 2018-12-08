@@ -33,6 +33,7 @@
     "no-nested-ternary": [0],
     "react/no-did-mount-set-state": [0],
     "react/no-danger": [0],
-    "no-alert": [0]
+    "no-alert": [0],
+    "linebreak-style": [0]
   }
 }
