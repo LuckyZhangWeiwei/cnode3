@@ -142,11 +142,11 @@ $headerBar: header-bar;
 }
 
 .article-details{
-  position: static;
+  // position: static;
   padding: .2rem 1rem;
   padding-top: .5rem;
-  margin-bottom: 2.5rem;
-  width:99%;
+  // margin-bottom: 2.5rem;
+  // width:99%;
   overflow: hidden;
   font-size: 14px;
   img{
@@ -154,6 +154,13 @@ $headerBar: header-bar;
     display: block;
   }
   -webkit-overflow-scrolling: touch;
+
+  position: absolute;
+  top: 40px;
+  bottom: 45px;
+  left: 0;
+  right: 0; 
+
 }
 
 .user-login-form {
@@ -364,6 +371,11 @@ $headerBar: header-bar;
 }
 
 .post {
+  position: absolute;
+  top: 40px;
+  bottom: 45px;
+  left: 0;
+  right: 0;
   padding: 20px 10px;
   .control {
     margin-bottom: 10px;
@@ -371,11 +383,11 @@ $headerBar: header-bar;
     display: block;
   }
   .radio-item {
-    text-align: 'center';
+    text-align: center;
     width: 22%;
   }
   .button-container {
-    text-align: 'center';
+    text-align: center;
     margin-top: 15px;
   }
 }
