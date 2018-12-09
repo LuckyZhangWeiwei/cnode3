@@ -362,3 +362,30 @@ $headerBar: header-bar;
     width: 15%;
   }
 }
+
+.post {
+  padding: 20px 10px;
+  .control {
+    margin-bottom: 10px;
+    width: 100%;
+    display: block;
+  }
+  .radio-item {
+    text-align: 'center';
+    width: 22%;
+  }
+  .button-container {
+    text-align: 'center';
+    margin-top: 15px;
+  }
+}
+
+.CodeMirror {
+	min-height: 250px !important;
+}
+
+.CodeMirror-scroll {
+  min-height: 250px !important;
+}
+
+

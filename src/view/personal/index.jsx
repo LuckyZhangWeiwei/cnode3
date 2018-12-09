@@ -55,8 +55,8 @@ Person.propTypes = {
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   isLogin: PropTypes.bool,
-  unReadMsg: PropTypes.array.isRequired,
-  hasReadMsg: PropTypes.array.isRequired,
+  unReadMsg: PropTypes.object.isRequired,
+  hasReadMsg: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Person);

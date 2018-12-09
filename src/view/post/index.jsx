@@ -88,12 +88,12 @@ class Post extends React.Component {
   render() {
     const RadioGroup = Radio.Group;
     return (
-      <div style={{ padding: '20px 10px' }}>
+      <div className="post">
         <Input
           placeholder="请输入标题"
           value={this.state.title}
           onChange={this.titleChange}
-          style={{ marginBottom: '10px' }}
+          className="control"
         />
         <SimpleMDE
           value={this.state.des}
@@ -103,17 +103,16 @@ class Post extends React.Component {
         />
         <RadioGroup
           defaultValue={this.state.tab}
-          buttonStyle="solid"
-          style={{ width: '100%' }}
+          className="control"
           onChange={this.tabChange}
           value={this.state.tab}
         >
-          <Radio.Button value="share" style={{ textAlign: 'center', width: '22%' }}>分享</Radio.Button>
-          <Radio.Button value="ask" style={{ textAlign: 'center', width: '22%' }}>问答</Radio.Button>
-          <Radio.Button value="job" style={{ textAlign: 'center', width: '22%' }}>招聘</Radio.Button>
-          <Radio.Button value="dev" style={{ textAlign: 'center', width: '34%' }}>客户端测试</Radio.Button>
+          <Radio.Button value="share" className="radio-item">分享</Radio.Button>
+          <Radio.Button value="ask" className="radio-item">问答</Radio.Button>
+          <Radio.Button value="job" className="radio-item">招聘</Radio.Button>
+          <Radio.Button value="dev" className="radio-item" style={{ width: '34%' }}>客户端测试</Radio.Button>
         </RadioGroup>
-        <div style={{ textAlign: 'center', marginTop: '30px' }}>
+        <div className="button-container" style={{ textAlign: 'center' }}>
           <Button onClick={this.postArticle} type="primary" style={{ marginRight: '15px' }} >提 交</Button>
           <Button onClick={this.clearForm}>清 空</Button>
         </div>
@@ -136,7 +135,7 @@ const mapDispatchToProps = dispatch => ({
 Post.propTypes = {
   postTopic: PropTypes.func.isRequired,
   isLogin: PropTypes.bool.isRequired,
-  history: PropTypes.string.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post);
