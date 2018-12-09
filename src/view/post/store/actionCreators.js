@@ -1,8 +1,9 @@
 import { constants } from '@view/post/store';
 
-export const postTopic = data => ({
+export const postTopic = (data, func) => ({
   type: constants.POSTARTICLE,
   data,
+  func,
 });
 
 export const postTopicSaga = res => ({

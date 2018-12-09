@@ -59,30 +59,42 @@ class Post extends React.Component {
   }
 
   postArticle() {
-    if (!this.state.title) {
-      toast.error('标题不能为空哦！', {
-        position: toast.POSITION.TOP_CENTER,
-      });
-      return;
-    } else if (!this.state.des) {
-      toast.error('内容不能为空哦!', {
-        position: toast.POSITION.TOP_CENTER,
-      });
-      return;
-    } else if (this.state.des.length < 10) {
-      toast.error('内容不能少于10个字!', {
-        position: toast.POSITION.TOP_CENTER,
-      });
-      return;
-    }
-    this.props.postTopic(this.state);
+    return new Promise(() => {
+      if (!this.state.title) {
+        toast.error('标题不能为空哦！', {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        return;
+      } else if (this.state.title.length < 10) {
+        toast.error('标题不能小于10个字哦！', {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        return;
+      } else if (!this.state.des) {
+        toast.error('内容不能为空哦!', {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        return;
+      } else if (this.state.des.length < 10) {
+        toast.error('内容不能少于10个字!', {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        return;
+      }
+      this.props.postTopic(this.state, () => { this.props.history.push(`/?tab=${this.state.tab}`); });
+    });
   }
 
   render() {
     const RadioGroup = Radio.Group;
     return (
-      <div style={{ position: 'relative', padding: '20px 10px' }}>
-        <Input placeholder="请输入标题" value={this.state.title} onChange={this.titleChange} style={{ marginBottom: '10px' }} />
+      <div style={{ padding: '20px 10px' }}>
+        <Input
+          placeholder="请输入标题"
+          value={this.state.title}
+          onChange={this.titleChange}
+          style={{ marginBottom: '10px' }}
+        />
         <SimpleMDE
           value={this.state.des}
           options={{ placeholder: '请输入内容' }}
@@ -101,7 +113,7 @@ class Post extends React.Component {
           <Radio.Button value="job" style={{ textAlign: 'center', width: '22%' }}>招聘</Radio.Button>
           <Radio.Button value="dev" style={{ textAlign: 'center', width: '34%' }}>客户端测试</Radio.Button>
         </RadioGroup>
-        <div style={{ position: 'absolute', Bottom: '50px', textAlign: 'right' }}>
+        <div style={{ textAlign: 'center', marginTop: '30px' }}>
           <Button onClick={this.postArticle} type="primary" style={{ marginRight: '15px' }} >提 交</Button>
           <Button onClick={this.clearForm}>清 空</Button>
         </div>
@@ -116,8 +128,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  postTopic(data) {
-    dispatch(actionCreators.postTopic(data));
+  postTopic(data, func) {
+    dispatch(actionCreators.postTopic(data, func));
   },
 });
 

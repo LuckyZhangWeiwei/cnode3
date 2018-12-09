@@ -3,7 +3,7 @@ import { constants } from '@view/post/store';
 import axios from 'axios';
 import { getStore } from '@script/utils';
 
-function* postArticle({ data }) {
+function* postArticle({ data, func }) {
   const postData = {
     accesstoken: getStore('loginUserInfo').accessToken,
     title: data.title,
@@ -19,6 +19,7 @@ function* postArticle({ data }) {
     type: constants.POSTARTICLE_SAGA,
     topic: res.data,
   });
+  yield func && func();
 }
 
 export function* postArticleSagas() {
