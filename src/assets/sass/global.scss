@@ -142,25 +142,26 @@ $headerBar: header-bar;
 }
 
 .article-details{
-  // position: static;
   padding: .2rem 1rem;
   padding-top: .5rem;
-  // margin-bottom: 2.5rem;
+  margin-bottom: 2.5rem;
   // width:99%;
-  overflow: hidden;
   font-size: 14px;
+  position: absolute;
+  top: 40px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+
+
   img{
     max-width: 90%;
     display: block;
   }
   -webkit-overflow-scrolling: touch;
-
-  position: absolute;
-  top: 40px;
-  bottom: 45px;
-  left: 0;
-  right: 0; 
-
 }
 
 .user-login-form {
@@ -371,12 +372,12 @@ $headerBar: header-bar;
 }
 
 .post {
+  padding: 20px 10px;
   position: absolute;
   top: 40px;
-  bottom: 45px;
+  bottom: 40px;
   left: 0;
   right: 0;
-  padding: 20px 10px;
   .control {
     margin-bottom: 10px;
     width: 100%;
@@ -388,16 +389,27 @@ $headerBar: header-bar;
   }
   .button-container {
     text-align: center;
-    margin-top: 15px;
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+  }
+  .CodeMirror {
+    min-height: 150px;
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .CodeMirror-scroll {
+    min-height: 150px;
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .CodeMirror-code {
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
-
-.CodeMirror {
-	min-height: 250px !important;
-}
-
-.CodeMirror-scroll {
-  min-height: 250px !important;
-}
-
 

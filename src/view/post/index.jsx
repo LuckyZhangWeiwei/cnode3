@@ -97,7 +97,10 @@ class Post extends React.Component {
         />
         <SimpleMDE
           value={this.state.des}
-          options={{ placeholder: '请输入内容' }}
+          options={{
+            placeholder: '请输入内容',
+            spellChecker: false,
+          }}
           style={{ marginBottom: '10px' }}
           onChange={this.desChange}
         />
