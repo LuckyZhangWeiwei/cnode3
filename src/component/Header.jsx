@@ -17,7 +17,6 @@ window.goback = () => {
 window.setCallback = (callback) => {
   window.callback = callback;
 };
-
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -29,7 +28,6 @@ class Header extends React.Component {
     window.setCallback(this);
   }
 
-
   collectArticle() {
     if (this.props.isLogin && isLogin()) {
       this.props.collect(this.props.articleId, this.props.isCollect);
@@ -40,11 +38,11 @@ class Header extends React.Component {
   }
 
   goback() {
-    const search = this.props.location.search.replace('?search=', '');
-    if (search.includes('article-details')) {
-      this.props.history.push(search);
+    if (this.props.history.location.pathname === '/user/login') {
+      this.props.history.replace('/');
     } else {
-      this.props.history.push('/');
+      this.props.declareCache();
+      this.props.history.goBack();
     }
   }
 
@@ -69,7 +67,6 @@ class Header extends React.Component {
         <h2 className="w100 tc header-bar-title ft-white">
           <span>
             <img src="https://static2.cnodejs.org/public/images/cnodejs_light.svg" alt="cnode" className="logo" />
-            {/* {this.props.title} */}
           </span>
         </h2>
         {
@@ -90,7 +87,6 @@ class Header extends React.Component {
 }
 
 Header.defaultProps = {
-  // title: '标题',
   isBack: false,
 };
 
@@ -108,6 +104,9 @@ const mapDispatchToProps = dispatch => ({
   syncCollection(userName) {
     dispatch(userInfoActionCreator.GetUserInfo(userName));
   },
+  declareCache() {
+    dispatch(userInfoActionCreator.DeclareCache(true));
+  },
 });
 
 Header.propTypes = {
@@ -120,8 +119,7 @@ Header.propTypes = {
   isBack: PropTypes.bool,
   syncCollection: PropTypes.func.isRequired,
   loginUserName: PropTypes.string,
-  // title: PropTypes.string,
+  declareCache: PropTypes.func.isRequired,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
-

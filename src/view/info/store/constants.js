@@ -6,3 +6,4 @@ export const GET_UNREAD_NUM_SAGA = 'info/GET_UNREAD_NUM_SAGA';
 export const GET_USER_MESSAGE = 'info/GET_USER_MESSAGE';
 export const GET_USER_MESSAGE_SAGA = 'info/GET_USER_MESSAGE_SAGA';
 export const CLEAR_USER_INFO = 'info/CLEAR_USER_INFO';
+export const DECLARE_CACHE = 'info/DECLARE_CACHE';

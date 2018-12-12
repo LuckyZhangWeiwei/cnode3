@@ -11,6 +11,7 @@ const defaultState = fromJS({
     hasMore: true,
   },
   scrollDirection: '',
+  scrollDistence: 0,
 });
 
 export default (state = defaultState, action) => {
@@ -45,6 +46,8 @@ export default (state = defaultState, action) => {
       });
     case constants.UPDATE_SCROLL_DIRECTION:
       return state.set('scrollDirection', action.direction);
+    case constants.UPDATE_SCROLL_DISTENCE:
+      return state.set('scrollDistence', action.value);
     default: return state;
   }
 };

@@ -36,3 +36,8 @@ export const GetUserFromSaga = userMessage => ({
 export const ClearUserInfo = () => ({
   type: constants.CLEAR_USER_INFO,
 });
+
+export const DeclareCache = value => ({
+  type: constants.DECLARE_CACHE,
+  value,
+});

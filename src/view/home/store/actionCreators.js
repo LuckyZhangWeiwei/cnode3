@@ -19,3 +19,8 @@ export const UpdateScrollDirection = direction => ({
   type: constants.UPDATE_SCROLL_DIRECTION,
   direction,
 });
+
+export const UpdateScrollDistence = value => ({
+  type: constants.UPDATE_SCROLL_DISTENCE,
+  value,
+});

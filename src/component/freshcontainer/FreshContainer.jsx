@@ -46,6 +46,7 @@ class FreshContainer extends React.Component {
     ) {
       const panel = e.currentTarget;
       const scrollBottom = panel.scrollHeight - panel.clientHeight - panel.scrollTop;
+      this.props.setScrollDistence(panel.scrollTop);
       if (scrollBottom < 5) this.loadMore();
     }
   }
@@ -218,6 +219,9 @@ const mapDispatchToProps = dispatch => ({
   updateScrollDirection(direction) {
     dispatch(actionCreators.UpdateScrollDirection(direction));
   },
+  setScrollDistence(value) {
+    dispatch(actionCreators.UpdateScrollDistence(value));
+  },
 });
 
 FreshContainer.propTypes = {
@@ -229,6 +233,7 @@ FreshContainer.propTypes = {
   distanceToRefresh: PropTypes.number,
   className: PropTypes.string.isRequired,
   children: PropTypes.element.isRequired,
+  setScrollDistence: PropTypes.func,
 };
 
 export default connect(null, mapDispatchToProps)(FreshContainer);

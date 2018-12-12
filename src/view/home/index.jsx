@@ -8,12 +8,14 @@ import TopicList from '@component/topiclist/TopicList';
 
 class Home extends React.Component {
   componentWillMount() {
-    const pageInfo = {
-      selectedTab: qs(this.props.location.search).tab || 'all',
-      pageIndex: 1,
-      isReset: true,
-    };
-    this.props.updateSelectedTab(pageInfo);
+    if (!this.props.fromCache) {
+      const pageInfo = {
+        selectedTab: qs(this.props.location.search).tab || 'all',
+        pageIndex: 1,
+        isReset: true,
+      };
+      this.props.updateSelectedTab(pageInfo);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,6 +43,7 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   pageInfo: state.getIn(['home', 'pageInfo']).toJS(),
+  fromCache: state.getIn(['userInfo', 'needCache']),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -53,6 +56,7 @@ Home.propTypes = {
   location: PropTypes.object.isRequired,
   updateSelectedTab: PropTypes.func.isRequired,
   pageInfo: PropTypes.object.isRequired,
+  fromCache: PropTypes.bool,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

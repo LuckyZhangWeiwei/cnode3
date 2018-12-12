@@ -9,6 +9,7 @@ const defaultState = fromJS({
   unreadNum: 0,
   userReadedMsg: [],
   userUnReadMsg: [],
+  needCache: false,
 });
 
 export default (state = defaultState, action) => {
@@ -33,6 +34,8 @@ export default (state = defaultState, action) => {
         userCollection: {},
         showLoading: true,
       });
+    case constants.DECLARE_CACHE:
+      return state.set('needCache', action.value);
     default: return state;
   }
 };

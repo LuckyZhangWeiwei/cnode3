@@ -13,19 +13,21 @@ class TopicList extends React.Component {
     super(props);
     this.state = {
       initializing: 2,
-      // refreshedAt: Date.now(),
     };
     this.refScroll = null;
   }
 
   componentDidMount() {
-    this.props.getTopicData(() => {
-      this.setState({
-        initializing: 2,
-      });
-    });
     this.refScroll = document.getElementById('scrollPanel');
-    // this.refScroll = this.refs.scrollCnt.refs.panel
+    if (!this.props.fromCache) {
+      this.props.getTopicData(() => {
+        this.setState({
+          initializing: 2,
+        });
+      });
+    } else {
+      this.refScroll.scrollTop = this.props.scrollDistence;
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -95,6 +97,8 @@ const mapStateToProps = state => ({
   topicList: state.getIn(['home', 'topicList']),
   pageInfo: state.getIn(['home', 'pageInfo']),
   isLoading: state.getIn(['home', 'loading']),
+  fromCache: state.getIn(['userInfo', 'needCache']),
+  scrollDistence: state.getIn(['home', 'scrollDistence']),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -113,6 +117,8 @@ TopicList.propTypes = {
   updateSelectedTab: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   topicList: PropTypes.object.isRequired,
+  fromCache: PropTypes.bool,
+  scrollDistence: PropTypes.number,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopicList);
