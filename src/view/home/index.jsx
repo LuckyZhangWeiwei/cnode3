@@ -8,14 +8,13 @@ import TopicList from '@component/topiclist/TopicList';
 
 class Home extends React.Component {
   componentWillMount() {
-    if (!this.props.fromCache) {
-      const pageInfo = {
-        selectedTab: qs(this.props.location.search).tab || 'all',
-        pageIndex: 1,
-        isReset: true,
-      };
-      this.props.updateSelectedTab(pageInfo);
-    }
+    const { pageIndex } = this.props.pageInfo;
+    const pageInfo = {
+      selectedTab: qs(this.props.location.search).tab || 'all',
+      pageIndex: !this.props.fromCache ? 1 : pageIndex,
+      isReset: !this.props.fromCache,
+    };
+    this.props.updateSelectedTab(pageInfo);
   }
 
   componentWillReceiveProps(nextProps) {
