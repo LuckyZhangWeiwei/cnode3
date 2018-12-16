@@ -9,13 +9,11 @@ class Comments extends React.Component {
     return !is(this.props.comments, nextProps.comments);
   }
   render() {
+    const { comments } = this.props;
     return (
-      this.props.comments ?
-        this.props.comments.map((item, index) => {
-          return <CommentItem key={item.get('id')} item={item} index={index} addclass="mgt bg-white" />;
-        })
-        :
-        null
+      comments.map((item, index) => (
+        <CommentItem key={item.get('id')} item={item} index={index} addclass="mgt bg-white" />
+      ))
     );
   }
 }

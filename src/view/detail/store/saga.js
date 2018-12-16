@@ -29,8 +29,32 @@ function* like({ replyId }) {
   yield put({ type: constants.LIKE_SAGA, replyId, userId });
 }
 
+function* postComment({ topicId, content }) {
+  const state = yield select();
+  const loginUser = yield state.getIn(['login', 'loginUser']).toJS();
+  const accesstoken = loginUser.accessToken;
+  const res = yield axios.post(`https://cnodejs.org/api/v1/topic/${topicId}/replies`, {
+    accesstoken,
+    content,
+  });
+  const reply = {
+    author: loginUser,
+    id: res.data.reply_id,
+    content: `<div class="markdown-text"><p>${content}</p></div>`,
+    ups: [],
+    create_at: new Date(),
+    is_uped: false,
+    reply_id: null,
+  };
+  yield put({
+    type: constants.POST_COMMENT_SAGA,
+    reply,
+  });
+}
+
 export function* detailSagas() {
   yield takeEvery(constants.GET_DETAIL_DATA, getDetail);
   yield takeEvery(constants.COLLECT_ARTICLE, collectArticle);
   yield takeEvery(constants.LIKE, like);
+  yield takeEvery(constants.POST_COMMENT, postComment);
 }

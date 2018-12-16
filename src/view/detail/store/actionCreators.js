@@ -24,3 +24,14 @@ export const like = replyId => ({
 export const clearDetail = () => ({
   type: constants.CLEAR_DETAIL_DATA,
 });
+
+export const postComment = (topicId, content) => ({
+  type: constants.POST_COMMENT,
+  topicId,
+  content,
+});
+
+export const postCommentFromSaga = replyId => ({
+  type: constants.POST_COMMENT_SAGA,
+  replyId,
+});

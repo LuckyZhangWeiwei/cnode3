@@ -11,6 +11,10 @@ import InputComment from '@component/InputComment';
 import { LoadLoop } from '@component/SharedComponent';
 
 class Detail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.postArticle = this.postArticle.bind(this);
+  }
   componentDidMount() {
     const topicId = qs(this.props.location.search).id;
     this.props.getTopicDetails(topicId);
@@ -23,6 +27,16 @@ class Detail extends React.Component {
 
   componentWillUnmount() {
     this.props.clearDetails();
+  }
+
+  postArticle(comment) {
+    // return new Promise((resolve) => {
+    //   const topicId = this.props.detail.get('id');
+    //   actionCreators.postComment(topicId, comment);
+    //   resolve();
+    // });
+    const topicId = this.props.detail.get('id');
+    this.props.postComment(topicId, comment);
   }
 
   render() {
@@ -65,6 +79,7 @@ class Detail extends React.Component {
               <InputComment
                 loginname={this.props.userInfo.get('loginname')}
                 avatar_url={this.props.userInfo.get('avatar_url')}
+                postComment={this.postArticle}
               />
               :
               <NotLogin location={this.props.location} />
@@ -88,6 +103,9 @@ const mapDispatchToProps = dispatch => ({
   clearDetails() {
     dispatch(actionCreators.clearDetail());
   },
+  postComment(topicId, content) {
+    dispatch(actionCreators.postComment(topicId, content));
+  },
 });
 
 Detail.propTypes = {
@@ -98,6 +116,7 @@ Detail.propTypes = {
   isLogin: PropTypes.bool,
   userInfo: PropTypes.object,
   clearDetails: PropTypes.func.isRequired,
+  postComment: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Detail);

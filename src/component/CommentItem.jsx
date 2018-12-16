@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import marked from 'marked';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { is } from 'immutable';
 import { isLogin } from '@script/utils';
 // import classNames from 'classnames';
 import '@fonts/svg/thumbs.svg';
@@ -13,6 +14,10 @@ class CommentItem extends React.Component {
   constructor(props) {
     super(props);
     this.userLike = this.userLike.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return !is(this.props, nextProps.props);
   }
 
   userLike() {

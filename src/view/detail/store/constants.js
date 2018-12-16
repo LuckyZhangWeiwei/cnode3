@@ -5,3 +5,5 @@ export const COLLECT_ARTICLE_SAGA = 'detail/COLLECT_ARTICLE_SAGA';
 export const LIKE = 'detail/LIKE';
 export const LIKE_SAGA = 'detail/LIKE_SAGA';
 export const CLEAR_DETAIL_DATA = 'detail/CLEAR_DETAIL_DATA';
+export const POST_COMMENT = 'detail/POST_COMMENT';
+export const POST_COMMENT_SAGA = 'detail/POST_COMMENT_SAGA';
