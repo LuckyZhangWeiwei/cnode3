@@ -35,9 +35,9 @@ export default (state = defaultState, action) => {
         showLoading: true,
       });
     case constants.POST_COMMENT_SAGA:
-      let replies = state.getIn(['detail', 'replies']);
-      replies = replies.push(action.reply);
-      return state.setIn(['detail', 'replies'], replies);
+      const replies = state.getIn(['detail', 'replies']).toJS();
+      replies.push(action.reply);
+      return state.setIn(['detail', 'replies'], fromJS(replies));
     default: return state;
   }
 };

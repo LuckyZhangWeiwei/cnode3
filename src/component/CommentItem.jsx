@@ -5,8 +5,7 @@ import marked from 'marked';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { is } from 'immutable';
-import { isLogin } from '@script/utils';
-// import classNames from 'classnames';
+import { isLogin, getStore } from '@script/utils';
 import '@fonts/svg/thumbs.svg';
 import '@fonts/svg/comment.svg';
 
@@ -68,22 +67,25 @@ class CommentItem extends React.Component {
             className="mgt markdown-body"
             dangerouslySetInnerHTML={{ __html: marked(content) }}
           />
-          <div className="tr">
-            <span className="user-thumbs" style={{ marginRight: '1rem' }}>
-              <svg
-                className="svg svg-thumbs"
-                onClick={this.userLike}
-              >
-                <use xlinkHref="#thumbs" fill={isUped ? '#e22c4a' : null} />
+          {
+            this.props.isMyLayer(author.loginname) ?
+            null
+            :
+            <div className="tr">
+              <span className="user-thumbs" style={{ marginRight: '1rem' }}>
+                <svg
+                  className="svg svg-thumbs"
+                  onClick={this.userLike}
+                >
+                  <use xlinkHref="#thumbs" fill={isUped ? '#e22c4a' : null} />
+                </svg>
+                {ups.size ? <span style={{ color: isUped ? '#e22c4a' : null }}>{ups.size}</span> : ''}
+              </span>
+              <svg className="svg svg-comment">
+                <use xlinkHref="#comment" />
               </svg>
-              {ups.size ? <span style={{ color: isUped ? '#e22c4a' : null }}>{ups.size}</span> : ''}
-            </span>
-            <svg
-              className="svg svg-comment"
-            >
-              <use xlinkHref="#comment" />
-            </svg>
-          </div>
+            </div>
+          }
         </div>
       </li>
     );
@@ -98,6 +100,7 @@ CommentItem.propTypes = {
   isLogin: PropTypes.bool,
   history: PropTypes.object,
   location: PropTypes.object,
+  isMyLayer: PropTypes.bool,
 };
 
 const mapPropstoState = state => ({
@@ -107,6 +110,10 @@ const mapPropstoState = state => ({
 const mapDispatchToProps = dispatch => ({
   like(replyId) {
     dispatch(actionCreators.like(replyId));
+  },
+  isMyLayer: (username) => {
+    const myName = getStore('loginUserInfo').loginname;
+    return username === myName;
   },
 });
 

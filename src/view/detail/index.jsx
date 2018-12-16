@@ -30,11 +30,6 @@ class Detail extends React.Component {
   }
 
   postArticle(comment) {
-    // return new Promise((resolve) => {
-    //   const topicId = this.props.detail.get('id');
-    //   actionCreators.postComment(topicId, comment);
-    //   resolve();
-    // });
     const topicId = this.props.detail.get('id');
     this.props.postComment(topicId, comment);
   }

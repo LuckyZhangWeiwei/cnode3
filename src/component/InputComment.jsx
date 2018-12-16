@@ -21,13 +21,10 @@ class InputComment extends React.Component {
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      // this.props.postComment(this.state.reply)
-      //   .then(() => {
-      //     this.setState({
-      //       reply: null,
-      //     });
-      //   });
       this.props.postComment(this.state.reply);
+      this.setState({
+        reply: null,
+      });
     }
   }
   changeText(event) {

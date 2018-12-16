@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { is } from 'immutable';
 import classNames from 'classnames';
-import { Tabs, Badge } from 'antd';
+import { Tabs } from 'antd';
 import { actionCreators } from '@view/info/store';
 import { actionCreators as loginActoinCreators } from '@view/login/store';
 import { qs, formatDateSimple } from '@script/utils';
@@ -99,17 +99,15 @@ class UserInfo extends React.Component {
               this.state.isCurrentUser ? 'space-between start' : 'start start'
             }
           >
-            <Badge count={this.props.unReadNum} style={{ transform: 'translateY(25%)' }}>
-              <Link to="/news" replace>
-                <img
-                  className="author-avatar bdr-half bg-white mgr"
-                  src={avatarUrl}
-                  data-layout-flex="0"
-                  alt=""
-                  style={{ transform: 'translateY(25%)' }}
-                />
-              </Link>
-            </Badge>
+            <Link to="/news" replace>
+              <img
+                className="author-avatar bdr-half bg-white mgr"
+                src={avatarUrl}
+                data-layout-flex="0"
+                alt=""
+                style={{ transform: 'translateY(25%)' }}
+              />
+            </Link>
             <div className="ft-qgrey user-info-row">
               <p>
                 <svg className="svg svg-meuser">
@@ -211,7 +209,6 @@ const mapStateToProps = state => ({
   loginUserName: state.getIn(['login', 'loginUser', 'loginname']),
   userCollection: state.getIn(['userInfo', 'userCollection']),
   activeTabKey: state.getIn(['userInfo', 'activeTabKey']),
-  unReadNum: state.getIn(['userInfo', 'unreadNum']),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -244,7 +241,7 @@ UserInfo.propTypes = {
   activeTabKey: PropTypes.string.isRequired,
   logOut: PropTypes.func.isRequired,
   getUnReadNum: PropTypes.func.isRequired,
-  unReadNum: PropTypes.number,
+  // unReadNum: PropTypes.number,
   clearUserInfo: PropTypes.func.isRequired,
 };
 
