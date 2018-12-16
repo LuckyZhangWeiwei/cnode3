@@ -100,7 +100,7 @@ CommentItem.propTypes = {
   isLogin: PropTypes.bool,
   history: PropTypes.object,
   location: PropTypes.object,
-  isMyLayer: PropTypes.bool,
+  isMyLayer: PropTypes.func.isRequired,
 };
 
 const mapPropstoState = state => ({

@@ -52,9 +52,18 @@ function* postComment({ topicId, content }) {
   });
 }
 
+function* markToRead({ topicId }) {
+  const state = yield select();
+  const accesstoken = yield state.getIn(['login', 'loginUser', 'accessToken']);
+  yield axios.post(`https://cnodejs.org/api/v1/message/mark_one/${topicId}`, {
+    accesstoken,
+  });
+}
+
 export function* detailSagas() {
   yield takeEvery(constants.GET_DETAIL_DATA, getDetail);
   yield takeEvery(constants.COLLECT_ARTICLE, collectArticle);
   yield takeEvery(constants.LIKE, like);
   yield takeEvery(constants.POST_COMMENT, postComment);
+  yield takeEvery(constants.MARK_TO_READ, markToRead);
 }

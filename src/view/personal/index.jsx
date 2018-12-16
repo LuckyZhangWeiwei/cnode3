@@ -5,6 +5,7 @@ import { actionCreators } from '@view/info/store';
 import PropTypes from 'prop-types';
 import { Tabs } from 'antd';
 import marked from 'marked';
+import { NotResult } from '@component/SharedComponent';
 import { formatDate } from '@script/utils';
 
 class Person extends React.Component {
@@ -64,54 +65,61 @@ export default connect(mapStateToProps, mapDispatchToProps)(Person);
 const MessageList = (props) => {
   const { info } = props;
   return (
-    info.map((item) => {
-      return (
-        <Link
-          className="ft-color"
-          to={{
-            pathname: '/index/article-details',
-            search: `?id=${item.getIn(['topic', 'id'])}`,
-            state: {
-              id: item.getIn(['topic', 'id']),
-            },
-          }}
-          key={item.get('id')}
-        >
-          <div className="article-item mgt">
-            <div data-layout="layout" data-layout-align="start start">
-              <img
-                className="author-avatar mgr bd-radius"
-                src={item.getIn(['author', 'avatar_url'])}
-                data-layout-flex="0"
-                alt=""
-              />
-              <div className="w100">
-                <h3
-                  data-ellipsis
-                  data-layout="layout"
-                  data-layout-align="space-between center"
-                >
-                  <span className="title-cnt" data-ellipsis>
-                    {item.getIn(['author', 'loginname'])}
-                  </span>
-                  {formatDate(item.get('create_at'))}
-                </h3>
-                <div className="mgt">
-                  <div>
-                    在话题
-                      {item.getIn(['topic', 'title'])}
-                    {item.get('type') === 'at' ? '中@了你!' : '回复了你!'}
-                    <div
-                      className="mgt markdown-body"
-                      dangerouslySetInnerHTML={{ __html: marked(item.getIn(['reply', 'content'])) }}
-                    />
+    info.size ?
+      info.map((item) => {
+        return (
+          <Link
+            className="ft-color"
+            to={{
+              pathname: '/index/article-details',
+              search: `?id=${item.getIn(['topic', 'id'])}&unreadmes=true`,
+              state: {
+                id: item.getIn(['topic', 'id']),
+              },
+            }}
+            key={item.get('id')}
+          >
+            <div className="article-item mgt">
+              <div data-layout="layout" data-layout-align="start start">
+                <img
+                  className="author-avatar mgr bd-radius"
+                  src={item.getIn(['author', 'avatar_url'])}
+                  data-layout-flex="0"
+                  alt=""
+                />
+                <div className="w100">
+                  <h3
+                    data-ellipsis
+                    data-layout="layout"
+                    data-layout-align="space-between center"
+                  >
+                    <span className="title-cnt" data-ellipsis>
+                      {item.getIn(['author', 'loginname'])}
+                    </span>
+                    {formatDate(item.get('create_at'))}
+                  </h3>
+                  <div className="mgt">
+                    <div>
+                      在话题
+                        {item.getIn(['topic', 'title'])}
+                      {item.get('type') === 'at' ? '中@了你!' : '回复了你!'}
+                      <div
+                        className="mgt markdown-body"
+                        dangerouslySetInnerHTML={{ __html: marked(item.getIn(['reply', 'content'])) }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </Link>
-      );
-    })
+          </Link>
+        );
+      })
+      :
+      <NotResult text="暂无数据" />
   );
+};
+
+MessageList.propTypes = {
+  info: PropTypes.object.isRequired,
 };
