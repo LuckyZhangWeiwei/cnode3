@@ -58,6 +58,10 @@ function* markToRead({ topicId }) {
   yield axios.post(`https://cnodejs.org/api/v1/message/mark_one/${topicId}`, {
     accesstoken,
   });
+  yield put({
+    type: constants.MARK_TO_READ_SAGA,
+    topicId,
+  });
 }
 
 export function* detailSagas() {

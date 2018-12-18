@@ -15,6 +15,7 @@ class Person extends React.Component {
       this.props.history.push(`/user/login?search=${this.props.location.pathname}`);
     } else {
       this.props.getMsg();
+      this.props.getUnReadNum();
     }
   }
   render() {
@@ -49,6 +50,9 @@ const mapDispatchToProps = dispatch => ({
   getMsg() {
     dispatch(actionCreators.GetUserMsg());
   },
+  getUnReadNum() {
+    dispatch(actionCreators.GetUserUnReadNum());
+  },
 });
 
 Person.propTypes = {
@@ -58,6 +62,7 @@ Person.propTypes = {
   isLogin: PropTypes.bool,
   unReadMsg: PropTypes.object.isRequired,
   hasReadMsg: PropTypes.object.isRequired,
+  getUnReadNum: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Person);

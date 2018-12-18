@@ -47,9 +47,9 @@ class UserInfo extends React.Component {
       const userName = qs(search).username;
       this.props.getUserInfo(userName);
     }
-    if (this.props.isLogin) {
-      this.props.getUnReadNum();
-    }
+    // if (this.props.isLogin) {
+    //   this.props.getUnReadNum();
+    // }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -221,9 +221,9 @@ const mapDispatchToProps = dispatch => ({
   logOut(fun) {
     dispatch(loginActoinCreators.logOut(fun));
   },
-  getUnReadNum() {
-    dispatch(actionCreators.GetUserUnReadNum());
-  },
+  // getUnReadNum() {
+  //   dispatch(actionCreators.GetUserUnReadNum());
+  // },
   clearUserInfo() {
     dispatch(actionCreators.ClearUserInfo());
   },
@@ -240,7 +240,7 @@ UserInfo.propTypes = {
   userCollection: PropTypes.object.isRequired,
   activeTabKey: PropTypes.string.isRequired,
   logOut: PropTypes.func.isRequired,
-  getUnReadNum: PropTypes.func.isRequired,
+  // getUnReadNum: PropTypes.func.isRequired,
   // unReadNum: PropTypes.number,
   clearUserInfo: PropTypes.func.isRequired,
 };
