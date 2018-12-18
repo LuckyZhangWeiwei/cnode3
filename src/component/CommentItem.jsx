@@ -68,7 +68,7 @@ class CommentItem extends React.Component {
             dangerouslySetInnerHTML={{ __html: marked(content) }}
           />
           {
-            this.props.isMyLayer(author.loginname) ?
+            this.props.isLogin && this.props.isMyLayer(author.loginname) ?
             null
             :
             <div className="tr">
