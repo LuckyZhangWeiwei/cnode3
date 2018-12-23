@@ -18,11 +18,6 @@ class Detail extends React.Component {
   componentDidMount() {
     const topicId = qs(this.props.location.search).id;
     this.props.getTopicDetails(topicId);
-
-    const isUnReadMessage = qs(this.props.location.search).unreadmes;
-    if (isUnReadMessage) {
-      this.props.markToRead(topicId);
-    }
   }
   shouldComponentUpdate(nextProps) {
     return !is(this.props.showLoading, nextProps.showLoading)
@@ -94,6 +89,7 @@ const mapStateToProps = state => ({
   detail: state.getIn(['detail', 'detail']),
   isLogin: state.getIn(['login', 'isLogin']),
   userInfo: state.getIn(['login', 'loginUser']),
+  unreadTopics: state.getIn(['userInfo', 'userUnReadMsg']),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -120,7 +116,6 @@ Detail.propTypes = {
   userInfo: PropTypes.object,
   clearDetails: PropTypes.func.isRequired,
   postComment: PropTypes.func.isRequired,
-  markToRead: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Detail);

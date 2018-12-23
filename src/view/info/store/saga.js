@@ -32,8 +32,21 @@ function* getUserMsg() {
   });
 }
 
+function* markToRead({ messageId }) {
+  const state = yield select();
+  const accesstoken = yield state.getIn(['login', 'loginUser', 'accessToken']);
+  yield axios.post(`https://cnodejs.org/api/v1/message/mark_one/${messageId}`, {
+    accesstoken,
+  });
+  yield put({
+    type: constants.MARK_TO_READ_SAGA,
+    messageId,
+  });
+}
+
 export function* userInfoSagas() {
   yield takeEvery(constants.GET_INFO_DATA, getUserInfo);
   yield takeEvery(constants.GET_UNREAD_NUM, getUnReadNum);
   yield takeEvery(constants.GET_USER_MESSAGE, getUserMsg);
+  yield takeEvery(constants.MARK_TO_READ, markToRead);
 }

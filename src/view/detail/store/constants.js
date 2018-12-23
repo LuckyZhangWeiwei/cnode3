@@ -7,5 +7,3 @@ export const LIKE_SAGA = 'detail/LIKE_SAGA';
 export const CLEAR_DETAIL_DATA = 'detail/CLEAR_DETAIL_DATA';
 export const POST_COMMENT = 'detail/POST_COMMENT';
 export const POST_COMMENT_SAGA = 'detail/POST_COMMENT_SAGA';
-export const MARK_TO_READ = 'detail/MARK_TO_READ';
-export const MARK_TO_READ_SAGA = 'detail/MARK_TO_READ_SAGA';

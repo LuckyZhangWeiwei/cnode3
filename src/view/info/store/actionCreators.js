@@ -41,3 +41,8 @@ export const DeclareCache = value => ({
   type: constants.DECLARE_CACHE,
   value,
 });
+
+export const markToRead = messageId => ({
+  type: constants.MARK_TO_READ,
+  messageId,
+});

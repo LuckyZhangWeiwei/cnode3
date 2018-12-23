@@ -39,16 +39,16 @@ class UserInfo extends React.Component {
       this.setState({
         isCurrentUser: true,
       });
-      this.props.getUserInfo(this.props.loginUserName);
-    } else if (!this.props.isLogin && search) {
-      const userName = qs(search).username;
-      this.props.getUserInfo(userName);
-    } else if (this.props.isLogin && search) {
+    } else if (search) {
       const userName = qs(search).username;
       this.props.getUserInfo(userName);
     }
-    // if (this.props.isLogin) {
-    //   this.props.getUnReadNum();
+    // else if (!this.props.isLogin && search) {
+    //   const userName = qs(search).username;
+    //   this.props.getUserInfo(userName);
+    // } else if (this.props.isLogin && search) {
+    //   const userName = qs(search).username;
+    //   this.props.getUserInfo(userName);
     // }
   }
 
@@ -59,7 +59,10 @@ class UserInfo extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.clearUserInfo();
+    const { search } = this.props.location;
+    if (!(this.props.isLogin && !search)) {
+      this.props.clearUserInfo();
+    }
   }
 
   showPopUp() {
@@ -221,9 +224,6 @@ const mapDispatchToProps = dispatch => ({
   logOut(fun) {
     dispatch(loginActoinCreators.logOut(fun));
   },
-  // getUnReadNum() {
-  //   dispatch(actionCreators.GetUserUnReadNum());
-  // },
   clearUserInfo() {
     dispatch(actionCreators.ClearUserInfo());
   },
@@ -232,7 +232,7 @@ const mapDispatchToProps = dispatch => ({
 UserInfo.propTypes = {
   location: PropTypes.object.isRequired,
   isLogin: PropTypes.bool,
-  loginUserName: PropTypes.string,
+  // loginUserName: PropTypes.string,
   getUserInfo: PropTypes.func,
   setActiveTab: PropTypes.func,
   userInfo: PropTypes.object.isRequired,

@@ -38,10 +38,6 @@ export default (state = defaultState, action) => {
       const replies = state.getIn(['detail', 'replies']).toJS();
       replies.push(action.reply);
       return state.setIn(['detail', 'replies'], fromJS(replies));
-    case constants.MARK_TO_READ_SAGA:
-      let unreadNum = state.getIn(['userInfo', 'unreadNum']);
-      unreadNum = unreadNum > 0 ? unreadNum - 1 : 0;
-      return state.setIn(['userInfo', unreadNum]);
     default: return state;
   }
 };

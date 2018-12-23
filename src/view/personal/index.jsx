@@ -9,14 +9,21 @@ import { NotResult } from '@component/SharedComponent';
 import { formatDate } from '@script/utils';
 
 class Person extends React.Component {
+  constructor(props) {
+    super(props);
+    this.markToRead = this.markToRead.bind(this);
+  }
   componentDidMount() {
     const { search } = this.props.location;
     if (!this.props.isLogin && !search) {
       this.props.history.push(`/user/login?search=${this.props.location.pathname}`);
     } else {
       this.props.getMsg();
-      this.props.getUnReadNum();
     }
+  }
+  markToRead(item) {
+    const messageId = item.get('id');
+    this.props.markToRead(messageId);
   }
   render() {
     const { hasReadMsg, unReadMsg } = this.props;
@@ -25,7 +32,7 @@ class Person extends React.Component {
         <Tabs defaultActiveKey="1">
           <Tabs.TabPane tab="未读消息" key="1">
             {
-              unReadMsg && <MessageList info={unReadMsg} />
+              unReadMsg && <MessageList markToRead={this.markToRead} info={unReadMsg} />
             }
           </Tabs.TabPane>
           <Tabs.TabPane tab="已读消息" key="2">
@@ -50,8 +57,8 @@ const mapDispatchToProps = dispatch => ({
   getMsg() {
     dispatch(actionCreators.GetUserMsg());
   },
-  getUnReadNum() {
-    dispatch(actionCreators.GetUserUnReadNum());
+  markToRead(messageId) {
+    dispatch(actionCreators.markToRead(messageId));
   },
 });
 
@@ -62,13 +69,13 @@ Person.propTypes = {
   isLogin: PropTypes.bool,
   unReadMsg: PropTypes.object.isRequired,
   hasReadMsg: PropTypes.object.isRequired,
-  getUnReadNum: PropTypes.func.isRequired,
+  markToRead: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Person);
 
 const MessageList = (props) => {
-  const { info } = props;
+  const { info, markToRead } = props;
   return (
     info.size ?
       info.map((item) => {
@@ -77,12 +84,13 @@ const MessageList = (props) => {
             className="ft-color"
             to={{
               pathname: '/index/article-details',
-              search: `?id=${item.getIn(['topic', 'id'])}&unreadmes=true`,
+              search: `?id=${item.getIn(['topic', 'id'])}`,
               state: {
                 id: item.getIn(['topic', 'id']),
               },
             }}
             key={item.get('id')}
+            onClick={() => { markToRead(item); }}
           >
             <div className="article-item mgt">
               <div data-layout="layout" data-layout-align="start start">
@@ -127,4 +135,5 @@ const MessageList = (props) => {
 
 MessageList.propTypes = {
   info: PropTypes.object.isRequired,
+  markToRead: PropTypes.func,
 };

@@ -36,6 +36,10 @@ export default (state = defaultState, action) => {
       });
     case constants.DECLARE_CACHE:
       return state.set('needCache', action.value);
+    case constants.MARK_TO_READ_SAGA:
+      let unreadNum = state.get('unreadNum');
+      unreadNum = unreadNum > 0 ? unreadNum - 1 : 0;
+      return state.set('unreadNum', unreadNum);
     default: return state;
   }
 };

@@ -7,11 +7,20 @@ import { tabs } from '@script/routers';
 import classNames from 'classnames';
 import Menu from '@component/Menu';
 import Header from '@component/Header';
+import { actionCreators } from '@view/info/store';
+import { getStore } from '@script/utils';
 import '@fonts/svg/gotop.svg';
 
 const findMatch = path => tabs.find(f => f.path === path);
 
 class App extends React.Component {
+  componentDidMount() {
+    if (this.props.isLogin) {
+      this.props.getUnReadNum();
+      const { loginname } = getStore('loginUserInfo');
+      this.props.getUserInfo(loginname);
+    }
+  }
   render() {
     const isUserCur = true;
     const queryName = null;
@@ -56,11 +65,25 @@ class App extends React.Component {
 
 const mapStateToProps = state => ({
   scrollDirection: state.getIn(['home', 'scrollDirection']),
+  isLogin: state.getIn(['login', 'isLogin']),
+  userinfo: state.getIn(['login', 'loginUser']),
+});
+
+const mapDispatchToProps = dispatch => ({
+  getUnReadNum() {
+    dispatch(actionCreators.GetUserUnReadNum());
+  },
+  getUserInfo(userName) {
+    dispatch(actionCreators.GetUserInfo(userName));
+  },
 });
 
 App.propTypes = {
   location: PropTypes.object.isRequired,
   scrollDirection: PropTypes.string.isRequired,
+  getUnReadNum: PropTypes.func.isRequired,
+  getUserInfo: PropTypes.func.isRequired,
+  isLogin: PropTypes.bool,
 };
 
-export default withRouter(connect(mapStateToProps, null)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

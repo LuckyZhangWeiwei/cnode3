@@ -35,8 +35,3 @@ export const postCommentFromSaga = replyId => ({
   type: constants.POST_COMMENT_SAGA,
   replyId,
 });
-
-export const markToRead = topicId => ({
-  type: constants.MARK_TO_READ,
-  topicId,
-});
