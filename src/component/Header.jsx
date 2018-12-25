@@ -41,7 +41,9 @@ class Header extends React.Component {
     if (this.props.history.location.pathname === '/user/login') {
       this.props.history.replace('/');
     } else {
-      this.props.declareCache(); // extis bug
+      if (this.props.pageInfo.toJS().pageIndex > 1) {
+        this.props.declareCache();
+      }
       this.props.history.goBack();
     }
   }
@@ -95,6 +97,7 @@ const mapStateToProps = state => ({
   isCollect: state.getIn(['detail', 'detail', 'is_collect']),
   articleId: state.getIn(['detail', 'detail', 'id']),
   loginUserName: state.getIn(['login', 'loginUser', 'loginname']),
+  pageInfo: state.getIn(['home', 'pageInfo']),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -120,6 +123,7 @@ Header.propTypes = {
   syncCollection: PropTypes.func.isRequired,
   loginUserName: PropTypes.string,
   declareCache: PropTypes.func.isRequired,
+  pageInfo: PropTypes.object.isRequired,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
