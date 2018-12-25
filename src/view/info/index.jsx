@@ -39,17 +39,11 @@ class UserInfo extends React.Component {
       this.setState({
         isCurrentUser: true,
       });
+      this.props.getUserInfo(this.props.loginUserName);
     } else if (search) {
       const userName = qs(search).username;
       this.props.getUserInfo(userName);
     }
-    // else if (!this.props.isLogin && search) {
-    //   const userName = qs(search).username;
-    //   this.props.getUserInfo(userName);
-    // } else if (this.props.isLogin && search) {
-    //   const userName = qs(search).username;
-    //   this.props.getUserInfo(userName);
-    // }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -232,7 +226,7 @@ const mapDispatchToProps = dispatch => ({
 UserInfo.propTypes = {
   location: PropTypes.object.isRequired,
   isLogin: PropTypes.bool,
-  // loginUserName: PropTypes.string,
+  loginUserName: PropTypes.string,
   getUserInfo: PropTypes.func,
   setActiveTab: PropTypes.func,
   userInfo: PropTypes.object.isRequired,

@@ -13,6 +13,7 @@ class CommentItem extends React.Component {
   constructor(props) {
     super(props);
     this.userLike = this.userLike.bind(this);
+    this.userComment = this.userComment.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -23,6 +24,16 @@ class CommentItem extends React.Component {
     if (this.props.isLogin && isLogin()) {
       const replyId = this.props.item.get('id');
       this.props.like(replyId);
+    } else {
+      this.props.history.push(`/user/login?search=${this.props.location.pathname}${this.props.location.search}`);
+    }
+  }
+
+  userComment() {
+    if (this.props.isLogin && isLogin()) {
+      // const replyId = this.props.item.get('id');
+      // const commentUserName = this.props.item.getIn(['author', 'loginname']);
+      console.log(this.refs.inputComment);
     } else {
       this.props.history.push(`/user/login?search=${this.props.location.pathname}${this.props.location.search}`);
     }
@@ -81,7 +92,7 @@ class CommentItem extends React.Component {
                 </svg>
                 {ups.size ? <span style={{ color: isUped ? '#e22c4a' : null }}>{ups.size}</span> : ''}
               </span>
-              <svg className="svg svg-comment">
+              <svg className="svg svg-comment" onClick={this.userComment}>
                 <use xlinkHref="#comment" />
               </svg>
             </div>

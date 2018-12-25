@@ -50,7 +50,7 @@ const Content = (props) => {
       {
           props.isLazyImg ? (
             <Link to={{
-              pathname: '/user',
+              pathname: '/otheruser',
               search: `?username=${item.getIn(['author', 'loginname'])}`,
               }
            }>
@@ -63,7 +63,7 @@ const Content = (props) => {
             </Link>
           ) : (
             <Link to={{
-              pathname: '/user',
+              pathname: '/otheruser',
               search: `?username=${item.getIn(['author', 'loginname'])}`,
           }}>
               <img

@@ -20,13 +20,12 @@ import '@fonts/svg/nuser.svg';
 class TabNav extends React.Component {
   render() {
     const tabItems = this.props.tabnav.map((item) => {
-      const activeClass = this.props.location.pathname === '/user' && this.props.location.search ? '' : 'nav-selected';
       return (
         <li key={item.name}>
           {
             item.name === '消息' ?
               <Badge count={this.props.unreadNum}>
-                <NavLink replace exact to={{ pathname: item.link }} activeClassName={activeClass}>
+                <NavLink replace exact to={{ pathname: item.link }} activeClassName="nav-selected">
                   <svg className={`svg svg-nav-default svg-n${item.type}`}>
                     <use xlinkHref={`#n${item.type}`} fill="#cfd6dc" />
                   </svg>
@@ -37,7 +36,7 @@ class TabNav extends React.Component {
                 </NavLink>
               </Badge>
             :
-              <NavLink replace exact to={{ pathname: item.link }} activeClassName={activeClass}>
+              <NavLink replace exact to={{ pathname: item.link }} activeClassName="nav-selected">
                 <svg className={`svg svg-nav-default svg-n${item.type}`}>
                   <use xlinkHref={`#n${item.type}`} fill="#cfd6dc" />
                 </svg>
@@ -58,7 +57,6 @@ class TabNav extends React.Component {
   }
 }
 TabNav.propTypes = {
-  location: PropTypes.object,
   tabnav: PropTypes.array.isRequired,
   unreadNum: PropTypes.number,
 };
@@ -91,6 +89,5 @@ Menu.propTypes = {
   className: PropTypes.string,
   location: PropTypes.object,
 };
-
 
 export default Menu;

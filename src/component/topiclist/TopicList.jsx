@@ -83,7 +83,7 @@ class TopicList extends React.Component {
           <div className="article-list">
             {
               this.props.topicList.map(item => (
-                <TopicItem key={item.get('id')} info={item} addclass="mgt bg-white" isLazyImg={false} />
+                <TopicItem key={item.get('id')} info={item} addclass="mgt bg-white" />
               ))
             }
           </div>

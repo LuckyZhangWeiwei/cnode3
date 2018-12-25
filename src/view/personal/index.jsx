@@ -90,7 +90,7 @@ const MessageList = (props) => {
               },
             }}
             key={item.get('id')}
-            onClick={() => { markToRead(item); }}
+            onClick={() => { if (markToRead) markToRead(item); }}
           >
             <div className="article-item mgt">
               <div data-layout="layout" data-layout-align="start start">

@@ -60,7 +60,8 @@ class InputComment extends React.Component {
               placeholder="朕说两句..."
               onChange={this.changeText}
               value={this.state.reply}
-              autosize={{ minRows: 1, maxRows: 12 }}
+              autosize={{ minRows: 1, maxRows: 18 }}
+              ref="inputComment"
             />
           </div>
           <div className="speak-submit-wrap bg-white">

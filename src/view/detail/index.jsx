@@ -35,6 +35,7 @@ class Detail extends React.Component {
   }
 
   render() {
+    const replyCount = this.props.detail.get('replies') ? this.props.detail.get('replies').size : 0;
     return this.props.showLoading ?
       <LoadLoop />
       :
@@ -57,11 +58,11 @@ class Detail extends React.Component {
         </div>
         <div className="pd markdown-body mgt bg-white" dangerouslySetInnerHTML={{ __html: marked(this.props.detail.get('content')) }} />
         {
-          this.props.detail.get('reply_count') === 0 ?
+          replyCount === 0 ?
           null
           :
           <div>
-            <p>{`共${this.props.detail.get('reply_count')}条评论`}</p>
+            <p>{`共${replyCount}条评论`}</p>
             <hr />
             <div style={{ background: '#f3f3f3' }}>
               <Comments />

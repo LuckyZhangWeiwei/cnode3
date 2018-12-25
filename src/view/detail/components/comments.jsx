@@ -8,6 +8,7 @@ class Comments extends React.Component {
   shouldComponentUpdate(nextProps) {
     return !is(this.props.comments, nextProps.comments);
   }
+
   render() {
     const { comments } = this.props;
     return (

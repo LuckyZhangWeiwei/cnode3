@@ -34,10 +34,12 @@ export const tabs = [
     name: '登录',
     component: hotLoader(() => import('@view/login')),
   },
-  // {
-  //   name: '未找到',
-  //   component: hotLoader(() => import('@view/unfound')),
-  // }
+  {
+    path: '/otheruser',
+    exact: true,
+    name: '其他用户',
+    component: hotLoader(() => import('@view/info')),
+  },
 ];
 
 export const categories = [

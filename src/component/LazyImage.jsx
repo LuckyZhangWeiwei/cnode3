@@ -7,7 +7,7 @@ const LazyImage = props => (
     {...props}
     defaultSource={require('@images/favicon.ico')}
     source={props.src}
-    // offset={1000}
+    offset={1000}
   />
 );
 

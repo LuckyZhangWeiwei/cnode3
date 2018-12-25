@@ -41,7 +41,7 @@ class Header extends React.Component {
     if (this.props.history.location.pathname === '/user/login') {
       this.props.history.replace('/');
     } else {
-      this.props.declareCache();
+      this.props.declareCache(); // extis bug
       this.props.history.goBack();
     }
   }
