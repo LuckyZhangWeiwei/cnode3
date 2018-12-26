@@ -29,9 +29,9 @@ class Detail extends React.Component {
     this.props.clearDetails();
   }
 
-  postArticle(comment) {
+  postArticle(comment, callback) {
     const topicId = this.props.detail.get('id');
-    this.props.postComment(topicId, comment);
+    this.props.postComment(topicId, comment, callback);
   }
 
   render() {
@@ -100,8 +100,8 @@ const mapDispatchToProps = dispatch => ({
   clearDetails() {
     dispatch(actionCreators.clearDetail());
   },
-  postComment(topicId, content) {
-    dispatch(actionCreators.postComment(topicId, content));
+  postComment(topicId, content, callback) {
+    dispatch(actionCreators.postComment(topicId, content, callback));
   },
   markToRead(messageId) {
     dispatch(actionCreators.markToRead(messageId));

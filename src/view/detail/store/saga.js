@@ -29,7 +29,7 @@ function* like({ replyId }) {
   yield put({ type: constants.LIKE_SAGA, replyId, userId });
 }
 
-function* postComment({ topicId, content }) {
+function* postComment({ topicId, content, callback }) {
   const state = yield select();
   const loginUser = yield state.getIn(['login', 'loginUser']).toJS();
   const accesstoken = loginUser.accessToken;
@@ -37,6 +37,7 @@ function* postComment({ topicId, content }) {
     accesstoken,
     content,
   });
+  yield callback && callback();
   const reply = {
     author: loginUser,
     id: res.data.reply_id,

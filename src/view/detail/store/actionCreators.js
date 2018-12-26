@@ -25,10 +25,11 @@ export const clearDetail = () => ({
   type: constants.CLEAR_DETAIL_DATA,
 });
 
-export const postComment = (topicId, content) => ({
+export const postComment = (topicId, content, callback) => ({
   type: constants.POST_COMMENT,
   topicId,
   content,
+  callback,
 });
 
 export const postCommentFromSaga = replyId => ({
